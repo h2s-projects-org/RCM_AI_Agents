@@ -1,4 +1,4 @@
-# 🏥 Denial Decision Intelligence Engine
+# 🏥 ClaimFlow AI Orchestrator
 
 > An AI-powered healthcare RCM solution that transforms unstructured claim denial data into structured, actionable decisions using intelligent classification, contextual mapping, and automated decisioning.
 
