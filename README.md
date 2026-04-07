@@ -138,9 +138,9 @@ For each claim, the system provides:
 
 ## 🤝 Contributors
 
-| Name | Role |
+| Name | Team |
 |------|------|
-| **Keerthi Raj N** | AI Workflow Architect |
+| **Keerthi N** | AI Workflow Architect |
 | **Jenisten Xavier** | AI Workflow Architect |
 
 **Team:** AI Workflow Architects
