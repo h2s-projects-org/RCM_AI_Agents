@@ -1,0 +1,808 @@
+[
+{
+  "category": "Non Covered Service",
+  "denial_codes": ["CO-96"],
+  "sub_type": "General Non-Covered Benefit",
+  "priority": 3,
+  "conditions": {
+    "diagnosis_not_covered": false,
+    "experimental_investigational": false,
+    "invalid_modifier": false
+  },
+  "workability": "Non-workable",
+  "collectability": "Low",
+  "risk_level": "Medium",
+  "action": "Patient Billing / Write-off",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "decision_source": "Rule Engine + Context Engine",
+  "manual_review_required": false,
+  "next_state": "Patient Responsibility",
+  "tasks": [
+    "Verify patient eligibility and coverage",
+    "Check service coverage under plan",
+    "Transfer balance to patient responsibility",
+    "Generate patient statement"
+  ],
+  "explainability": "Service is not covered under patient’s insurance plan. Typically transferred to patient responsibility.",
+  "prevention": [
+    "Real-time eligibility verification",
+    "Coverage validation before service"
+  ]
+},
+{
+  "category": "Medical Necessity",
+  "denial_codes": ["CO-50"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "High",
+  "action": "Appeal",
+  "automation_level": "Medium",
+  "confidence_threshold_auto": 0.85,
+  "next_state": "Pending Clinical Review",
+  "tasks": [
+    "Review clinical documentation",
+    "Obtain physician justification",
+    "Attach supporting medical records",
+    "Submit appeal"
+  ],
+  "explainability": "Service denied as not medically necessary. Requires clinical justification for appeal.",
+  "prevention": [
+    "Clinical validation rules",
+    "AI-based medical necessity checks"
+  ]
+},
+{
+  "category": "Bundling / Unbundling",
+  "denial_codes": ["CO-97"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Coding Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate CPT bundling rules",
+    "Correct coding combinations",
+    "Apply appropriate modifiers",
+    "Resubmit claim"
+  ],
+  "explainability": "Procedure bundled with another service. Requires coding correction.",
+  "prevention": [
+    "CPT bundling validation engine",
+    "Modifier recommendation system"
+  ]
+},
+{
+  "category": "Invalid Coding",
+  "denial_codes": ["CO-4"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Coding Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.92,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate CPT/HCPCS codes",
+    "Check modifier usage",
+    "Correct invalid coding",
+    "Resubmit claim"
+  ],
+  "explainability": "Invalid or inconsistent coding identified. Requires correction before resubmission.",
+  "prevention": [
+    "CPT validation engine",
+    "Modifier-CPT compatibility checks"
+  ]
+},
+{
+  "category": "Eligibility",
+  "denial_codes": ["CO-27"],
+  "workability": "Non-workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Patient Billing",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Patient Responsibility",
+  "tasks": [
+    "Verify patient eligibility on DOS",
+    "Confirm coverage details",
+    "Transfer balance to patient",
+    "Notify patient"
+  ],
+  "explainability": "Patient not eligible on date of service. Typically becomes patient responsibility.",
+  "prevention": [
+    "Real-time eligibility verification",
+    "Eligibility check at scheduling"
+  ]
+},
+{
+  "category": "Coordination of Benefits (COB)",
+  "denial_codes": ["CO-22"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Medium",
+  "action": "Rebill Secondary",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Pending Secondary Submission",
+  "tasks": [
+    "Identify primary payer",
+    "Obtain primary EOB",
+    "Submit claim to secondary payer",
+    "Track payment"
+  ],
+  "explainability": "Claim requires coordination between multiple insurers. Needs correct payer sequencing.",
+  "prevention": [
+    "COB validation before submission",
+    "Payer sequencing rules engine"
+  ]
+},
+{
+  "category": "Payment Adjustment",
+  "denial_codes": ["CO-45"],
+  "workability": "Non-workable",
+  "collectability": "Low",
+  "risk_level": "Low",
+  "action": "Contractual Adjustment",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.95,
+  "next_state": "Closed",
+  "tasks": [
+    "Validate contract rates",
+    "Apply contractual adjustment",
+    "Close claim"
+  ],
+  "explainability": "Payment adjusted as per contract. No further action required.",
+  "prevention": [
+    "Contract rate validation",
+    "Allowed amount benchmarking"
+  ]
+},
+{
+  "category": "Missing Documentation",
+  "denial_codes": ["CO-16", "N290"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Medium",
+  "action": "Documentation Submission",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Identify missing documents",
+    "Collect required records",
+    "Attach documentation",
+    "Resubmit claim"
+  ],
+  "explainability": "Required documentation not submitted. Easily resolvable with proper attachments.",
+  "prevention": [
+    "Document checklist validation",
+    "Auto-attachment rules"
+  ]
+},
+{
+  "category": "Service Not Authorized (Pre-cert Missing)",
+  "denial_codes": ["CO-197"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "High",
+  "action": "Retro Authorization / Appeal",
+  "automation_level": "Medium",
+  "confidence_threshold_auto": 0.85,
+  "next_state": "Pending Authorization",
+  "tasks": [
+    "Check if pre-certification was required",
+    "Request retro authorization",
+    "Prepare supporting clinical documents",
+    "Submit appeal"
+  ],
+  "explainability": "Service required prior authorization which was not obtained.",
+  "prevention": [
+    "Pre-certification validation",
+    "Authorization alerts before DOS"
+  ]
+},
+{
+  "category": "Procedure Not Consistent with Diagnosis",
+  "denial_codes": ["CO-11"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Coding Review / Appeal",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Coding Review",
+  "tasks": [
+    "Validate CPT-DX linkage",
+    "Correct diagnosis codes if needed",
+    "Review medical necessity",
+    "Resubmit or appeal"
+  ],
+  "explainability": "Procedure code does not align with diagnosis code.",
+  "prevention": [
+    "CPT-DX validation engine",
+    "AI-based coding recommendations"
+  ]
+},
+{
+  "category": "Invalid Modifier",
+  "denial_codes": ["CO-4"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Modifier Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.92,
+  "decision_source": "Rule Engine",
+  "manual_review_required": false,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate modifier usage",
+    "Remove or replace invalid modifiers",
+    "Revalidate CPT combination",
+    "Resubmit claim"
+  ],
+  "explainability": "Incorrect or invalid modifier used with CPT code.",
+  "prevention": [
+    "Modifier validation rules engine",
+    "CPT-modifier compatibility checks"
+  ]
+},
+{
+  "category": "Place of Service Error",
+  "denial_codes": ["CO-5"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "POS Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate place of service",
+    "Correct POS code",
+    "Cross-check billing guidelines",
+    "Resubmit claim"
+  ],
+  "explainability": "Incorrect place of service reported.",
+  "prevention": [
+    "POS validation rules",
+    "Facility mapping checks"
+  ]
+},
+{
+  "category": "Frequency Limit Exceeded",
+  "denial_codes": ["CO-119"],
+  "sub_type": "Utilization Frequency Exceeded",
+  "priority": 1,
+  "conditions": {
+    "frequency_limit_exceeded": true,
+    "benefit_exceeded": false
+  },
+  "workability": "Workable",
+  "collectability": "Low",
+  "risk_level": "Medium",
+  "action": "Appeal",
+  "automation_level": "Medium",
+  "confidence_threshold_auto": 0.85,
+  "decision_source": "Rule Engine + Context Engine",
+  "manual_review_required": true,
+  "next_state": "Pending Review",
+  "tasks": [
+    "Check frequency limits",
+    "Validate medical necessity",
+    "Prepare appeal documentation",
+    "Submit appeal"
+  ],
+  "explainability": "Service exceeded payer frequency limits.",
+  "prevention": [
+    "Frequency validation before billing",
+    "Utilization tracking"
+  ]
+},
+{
+  "category": "Invalid Provider",
+  "denial_codes": ["CO-13"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "High",
+  "action": "Provider Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate provider credentials",
+    "Check NPI details",
+    "Correct billing provider",
+    "Resubmit claim"
+  ],
+  "explainability": "Provider not eligible or incorrectly billed.",
+  "prevention": [
+    "Provider validation system",
+    "NPI registry checks"
+  ]
+},
+{
+  "category": "Claim Not Received",
+  "denial_codes": ["CO-15"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Low",
+  "action": "Resubmission",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Verify submission history",
+    "Check clearinghouse reports",
+    "Resubmit claim",
+    "Track acknowledgment"
+  ],
+  "explainability": "Payer indicates claim was not received.",
+  "prevention": [
+    "Submission tracking system",
+    "Acknowledgment validation"
+  ]
+},
+{
+  "category": "Exceeded Benefit Maximum",
+  "denial_codes": ["CO-119"],
+  "sub_type": "Benefit Maximum Exhausted",
+  "priority": 2,
+  "conditions": {
+    "benefit_exceeded": true
+  },
+  "workability": "Non-workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Patient Billing",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "decision_source": "Rule Engine + Context Engine",
+  "manual_review_required": true,
+  "next_state": "Patient Responsibility",
+  "tasks": [
+    "Verify benefit limits",
+    "Confirm usage history",
+    "Transfer balance to patient",
+    "Notify patient"
+  ],
+  "explainability": "Patient has exceeded plan benefits.",
+  "prevention": [
+    "Benefit tracking system",
+    "Pre-service benefit validation"
+  ]
+},
+{
+  "category": "Experimental / Investigational Service",
+  "denial_codes": ["CO-50"],
+  "workability": "Non-workable",
+  "collectability": "Low",
+  "risk_level": "High",
+  "action": "Write-off / Patient Billing",
+  "automation_level": "Low",
+  "confidence_threshold_auto": 0.95,
+  "decision_source": "Rule Engine + Policy Validation",
+  "manual_review_required": true,
+  "next_state": "Closed",
+  "tasks": [
+    "Verify payer policy",
+    "Check service classification",
+    "Evaluate appeal feasibility",
+    "Initiate write-off"
+  ],
+  "explainability": "Service considered experimental and not covered.",
+  "prevention": [
+    "Policy validation engine",
+    "Coverage rules integration"
+  ]
+},
+{
+  "category": "Invalid Units",
+  "denial_codes": ["CO-151"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Unit Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.92,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate billed units",
+    "Correct unit count",
+    "Verify coding guidelines",
+    "Resubmit claim"
+  ],
+  "explainability": "Incorrect number of units billed.",
+  "prevention": [
+    "Unit validation rules",
+    "Procedure-unit mapping"
+  ]
+},
+{
+  "category": "Diagnosis Not Covered",
+  "denial_codes": ["CO-96"],
+  "sub_type": "Diagnosis Not Covered",
+  "priority": 1,
+  "conditions": {
+    "diagnosis_not_covered": true
+  },
+  "workability": "Workable",
+  "collectability": "Low",
+  "risk_level": "Medium",
+  "action": "Coding Review / Appeal",
+  "automation_level": "Medium",
+  "confidence_threshold_auto": 0.85,
+  "decision_source": "Rule Engine + Context Engine",
+  "manual_review_required": true,
+  "next_state": "Pending Review",
+  "tasks": [
+    "Validate diagnosis code",
+    "Check covered diagnosis list",
+    "Update coding if applicable",
+    "Submit appeal"
+  ],
+  "explainability": "Diagnosis not covered under payer policy.",
+  "prevention": [
+    "DX coverage validation",
+    "Policy-based coding checks"
+  ]
+},
+{
+  "category": "Time Limit Expired",
+  "denial_codes": ["CO-29"],
+  "sub_type": "Timely Filing Limit",
+  "priority": 1,
+  "conditions": {
+    "timely_filing_days_exceeded": true
+  },
+  "workability": "Non-workable",
+  "collectability": "Low",
+  "risk_level": "High",
+  "action": "Exception Review -> Write-off",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.95,
+  "decision_source": "Rule Engine + Payer SLA Check",
+  "manual_review_required": true,
+  "next_state": "Closed",
+  "tasks": [
+    "Validate submission timelines",
+    "Check exception eligibility",
+    "Initiate write-off"
+  ],
+  "explainability": "Charges submitted after allowed time frame.",
+  "prevention": [
+    "Charge lag monitoring",
+    "Submission alerts"
+  ]
+},
+{
+  "category": "Invalid Patient Information",
+  "denial_codes": ["CO-16", "N345"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Medium",
+  "action": "Data Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.92,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate patient demographics",
+    "Correct name/DOB/member ID",
+    "Verify insurance details",
+    "Resubmit claim"
+  ],
+  "explainability": "Incorrect patient information caused claim rejection.",
+  "prevention": [
+    "Front-desk validation",
+    "Eligibility + demographic verification"
+  ]
+},
+{
+  "category": "Subscriber / Policy Mismatch",
+  "denial_codes": ["CO-31"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Medium",
+  "action": "Insurance Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Verify subscriber details",
+    "Correct policy/member ID",
+    "Update insurance info",
+    "Resubmit claim"
+  ],
+  "explainability": "Mismatch in subscriber or policy details.",
+  "prevention": [
+    "Insurance verification at intake",
+    "Policy validation rules"
+  ]
+},
+{
+  "category": "Out of Network",
+  "denial_codes": ["CO-242"],
+  "workability": "Non-workable",
+  "collectability": "Medium",
+  "risk_level": "High",
+  "action": "Patient Billing / Negotiation",
+  "automation_level": "Low",
+  "confidence_threshold_auto": 0.95,
+  "next_state": "Patient Responsibility",
+  "tasks": [
+    "Verify network status",
+    "Check patient consent",
+    "Bill patient or negotiate",
+    "Document OON disclosure"
+  ],
+  "explainability": "Provider is out-of-network for this payer.",
+  "prevention": [
+    "Network validation",
+    "Patient OON consent workflow"
+  ]
+},
+{
+  "category": "Referral Missing",
+  "denial_codes": ["CO-198"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "High",
+  "action": "Referral Request / Appeal",
+  "automation_level": "Medium",
+  "confidence_threshold_auto": 0.85,
+  "next_state": "Pending Referral",
+  "tasks": [
+    "Check referral requirement",
+    "Obtain referral from PCP",
+    "Attach documentation",
+    "Submit appeal"
+  ],
+  "explainability": "Referral required but not obtained.",
+  "prevention": [
+    "Referral validation before visit",
+    "PCP workflow integration"
+  ]
+},
+{
+  "category": "Coordination of Benefits Missing Info",
+  "denial_codes": ["CO-22", "N30"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Medium",
+  "action": "COB Update",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Pending COB Update",
+  "tasks": [
+    "Collect other insurance info",
+    "Update COB details",
+    "Submit to correct payer",
+    "Track claim"
+  ],
+  "explainability": "Incomplete coordination of benefits information.",
+  "prevention": [
+    "COB verification",
+    "Multi-payer validation rules"
+  ]
+},
+{
+  "category": "Authorization Number Invalid",
+  "denial_codes": ["CO-197", "N54"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "High",
+  "action": "Authorization Correction",
+  "automation_level": "Medium",
+  "confidence_threshold_auto": 0.85,
+  "next_state": "Pending Authorization Fix",
+  "tasks": [
+    "Validate auth number",
+    "Correct authorization details",
+    "Contact payer if needed",
+    "Resubmit claim"
+  ],
+  "explainability": "Authorization number invalid or mismatched.",
+  "prevention": [
+    "Auth number validation",
+    "Pre-bill authorization checks"
+  ]
+},
+{
+  "category": "Service Already Paid",
+  "denial_codes": ["CO-97", "CO-18"],
+  "workability": "Non-workable",
+  "collectability": "Low",
+  "risk_level": "Low",
+  "action": "Close",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.95,
+  "next_state": "Closed",
+  "tasks": [
+    "Verify payment history",
+    "Link to paid claim",
+    "Close duplicate entry"
+  ],
+  "explainability": "Service already reimbursed.",
+  "prevention": [
+    "Duplicate payment detection",
+    "Claim tracking system"
+  ]
+},
+{
+  "category": "Capitation / Managed Care",
+  "denial_codes": ["CO-24"],
+  "workability": "Non-workable",
+  "collectability": "Low",
+  "risk_level": "Low",
+  "action": "Close",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.95,
+  "next_state": "Closed",
+  "tasks": [
+    "Verify capitation agreement",
+    "Confirm payment model",
+    "Close claim"
+  ],
+  "explainability": "Payment included in capitation agreement.",
+  "prevention": [
+    "Capitation contract mapping",
+    "Payer rule engine"
+  ]
+},
+{
+  "category": "Non Billable Service",
+  "denial_codes": ["CO-204"],
+  "workability": "Non-workable",
+  "collectability": "Low",
+  "risk_level": "Medium",
+  "action": "Write-off",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.95,
+  "next_state": "Closed",
+  "tasks": [
+    "Validate billing guidelines",
+    "Confirm non-billable status",
+    "Write off amount"
+  ],
+  "explainability": "Service is not billable under payer rules.",
+  "prevention": [
+    "Billing rules validation",
+    "Service eligibility checks"
+  ]
+},
+{
+  "category": "Invalid Revenue Code",
+  "denial_codes": ["CO-4", "N103"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Coding Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate revenue code",
+    "Correct mapping",
+    "Align with CPT/service",
+    "Resubmit claim"
+  ],
+  "explainability": "Incorrect revenue code used.",
+  "prevention": [
+    "Revenue code validation",
+    "Charge master alignment"
+  ]
+},
+{
+  "category": "Invalid DRG",
+  "denial_codes": ["CO-4", "N211"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "High",
+  "action": "DRG Review",
+  "automation_level": "Medium",
+  "confidence_threshold_auto": 0.85,
+  "next_state": "Clinical Coding Review",
+  "tasks": [
+    "Validate DRG assignment",
+    "Review clinical documentation",
+    "Correct DRG",
+    "Resubmit claim"
+  ],
+  "explainability": "Incorrect DRG grouping identified.",
+  "prevention": [
+    "DRG grouper validation",
+    "Clinical documentation improvement (CDI)"
+  ]
+},
+{
+  "category": "Invalid Taxonomy Code",
+  "denial_codes": ["CO-16", "N290"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Provider Data Correction",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Ready for Resubmission",
+  "tasks": [
+    "Validate taxonomy code",
+    "Correct provider classification",
+    "Update claim",
+    "Resubmit"
+  ],
+  "explainability": "Incorrect provider taxonomy used.",
+  "prevention": [
+    "Provider master validation",
+    "NPI-taxonomy mapping checks"
+  ]
+},
+{
+  "category": "Unlisted Procedure Code",
+  "denial_codes": ["CO-4", "N130"],
+  "workability": "Workable",
+  "collectability": "Medium",
+  "risk_level": "Medium",
+  "action": "Manual Review / Appeal",
+  "automation_level": "Low",
+  "confidence_threshold_auto": 0.85,
+  "next_state": "Manual Review",
+  "tasks": [
+    "Validate unlisted CPT usage",
+    "Attach supporting documentation",
+    "Provide justification",
+    "Submit appeal"
+  ],
+  "explainability": "Unlisted procedure requires manual review.",
+  "prevention": [
+    "CPT selection guidance",
+    "Alternative code suggestions"
+  ]
+},
+{
+  "category": "Claim Under Review",
+  "denial_codes": ["N20"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Low",
+  "action": "Follow-up",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Pending Payer Review",
+  "tasks": [
+    "Track claim status",
+    "Follow up with payer",
+    "Update system status"
+  ],
+  "explainability": "Claim is under payer review.",
+  "prevention": [
+    "Status tracking automation",
+    "Follow-up reminders"
+  ]
+},
+{
+  "category": "Pending Medical Records",
+  "denial_codes": ["N29"],
+  "workability": "Workable",
+  "collectability": "High",
+  "risk_level": "Medium",
+  "action": "Submit Records",
+  "automation_level": "High",
+  "confidence_threshold_auto": 0.9,
+  "next_state": "Pending Documentation",
+  "tasks": [
+    "Retrieve medical records",
+    "Attach documentation",
+    "Submit to payer",
+    "Track response"
+  ],
+  "explainability": "Payer requires medical records.",
+  "prevention": [
+    "Auto document attachment",
+    "Medical record checklist"
+  ]
+}
+]
