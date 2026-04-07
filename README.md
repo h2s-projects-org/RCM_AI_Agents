@@ -20,7 +20,7 @@ There is **no standardized system** to determine workability, collectability, or
 
 ## 💡 Solution Overview
 
-The **Denial Decision Intelligence Engine** uses AI + rule-based logic to:
+The **ClaimFlow AI Orchestrator** uses AI + rule-based logic to:
 
 - ✅ Classify denial codes into standardized categories
 - ✅ Resolve conflicts when multiple denial codes exist
